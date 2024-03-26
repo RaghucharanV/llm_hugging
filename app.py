@@ -10,15 +10,15 @@ import time
 
 
 
+st.sidebar.title("Huggingface_api")
+st.sidebar.text("Login to hugging Face hub,create an api and paste the api below.")
+user_api = st.sidebar.text_input(label="hugging_face")
+
 #HUGGINGFACEHUB_API_TOKEN = getpass()
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+HUGGINGFACEHUB_API_TOKEN = user_api
 
 st.title("A LLM based Chatbot")
 st.subheader("with Hugging_face_")
-
-
-llm = HuggingFaceHub(repo_id='declare-lab/flan-alpaca-large', model_kwargs={"temperature":0.1,"max_length":1024})
-
 
 
 prompt = PromptTemplate(
@@ -26,9 +26,14 @@ prompt = PromptTemplate(
     input_variables=['product']
 )
 
+if HUGGINGFACEHUB_API_TOKEN:
+    llm = HuggingFaceHub(repo_id='declare-lab/flan-alpaca-large', model_kwargs={"temperature":0.1,"max_length":1024},huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN)
+    chain = LLMChain(llm=llm,prompt=prompt)
+
+else: pass
 
 
-chain = LLMChain(llm=llm,prompt=prompt)
+
 
 if "messages" not in st.session_state:
     st.session_state.messages= []
