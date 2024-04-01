@@ -15,7 +15,7 @@ st.sidebar.text("Login to hugging Face hub,create an api and paste the api below
 user_api = st.sidebar.text_input(label="hugging_face")
 
 #HUGGINGFACEHUB_API_TOKEN = getpass()
-HUGGINGFACEHUB_API_TOKEN = "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"
+HUGGINGFACEHUB_API_TOKEN = user_api
 
 st.title("A LLM based Chatbot")
 st.subheader("with Hugging_face_")
